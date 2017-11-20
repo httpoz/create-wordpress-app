@@ -81,7 +81,7 @@ func downloadAndExtractWordpress() {
 	defer f.Close()
 
 	fmt.Println("Unpacking tar ball...")
-	Untar(site, f)
+	Untar(f, site)
 
 	fmt.Println("Preparing Site")
 	os.Rename(site+"/wordpress", site+"/site")
