@@ -25,9 +25,8 @@ func main() {
 
 	checkFlags()
 
-	dirDoesNotExist()
+	setUpDir()
 
-	createDirectories()
 	downloadAndExtractWordpress()
 }
 
@@ -40,17 +39,14 @@ func checkFlags() {
 	}
 }
 
-func dirDoesNotExist() {
+func setUpDir() {
 	if _, err := os.Stat(site); err == nil {
 		fmt.Println(site + " already exists. I cannot overwrite directories.")
 		os.Exit(1)
+	} else {
+		os.Mkdir(site, os.FileMode(0755))
+		fmt.Println("Site folder created.")
 	}
-}
-
-func createDirectories() {
-	os.Mkdir(site, os.FileMode(0755))
-
-	fmt.Println("Site folder created.")
 }
 
 func downloadAndExtractWordpress() {
